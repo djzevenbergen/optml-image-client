@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useContext } from 'react';
 import Header from './Header';
-import './Styles.css';
+import '../index.css';
 import firebase from "firebase/app";
 import SignIn from './auth/SignIn';
 import { withFirestore, useFirestore } from 'react-redux-firebase';

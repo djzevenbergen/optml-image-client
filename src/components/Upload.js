@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useContext } from 'react';
-import './Styles.css';
+import '../index.css';
 // import Header from './Header';
 import firebase from "firebase/app";
 // import SignIn from './auth/SignIn';
