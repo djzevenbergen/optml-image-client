@@ -238,10 +238,10 @@ const Upload = (props) => {
     <React.Fragment>
 
 
-      {user ? <div>
+      {user ? <div className='form-container'>
 
 
-        <form onSubmit={handleFileUpload}>
+        <form onSubmit={handleFileUpload} className='form'>
           <div>
             <label>Select you primary image:</label>
             <input type="file" name="main-pic" ref={primaryFile} text="Upload file" />
@@ -267,7 +267,7 @@ const Upload = (props) => {
               {Object.keys(prices).map((c) => (
                 <option value={c}>{c}</option>
               ))}
-            </select>
+            </select><br/>
             <label>Email to:</label>
             <input type="email" defaultValue={user.email} onChange={e => handleEmail(e.currentTarget.value)} />
           </div>
