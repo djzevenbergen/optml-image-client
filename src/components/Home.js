@@ -1,8 +1,5 @@
-
-
 import React, { useState, useEffect, useContext } from 'react';
 import Header from './Header';
-
 import firebase from "firebase/app";
 import SignIn from './auth/SignIn';
 import { withFirestore, useFirestore } from 'react-redux-firebase';
@@ -10,7 +7,6 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import { ThemeProvider } from 'styled-components';
 import { UserContext } from '../userContext';
 import { MyContext } from "../context.js"
-
 import { Jumbotron, Navbar, Nav, Col } from 'react-bootstrap';
 
 import "bootstrap/dist/css/bootstrap.min.css";

@@ -1,16 +1,17 @@
 import React, { useRef, useState, useEffect, useContext } from 'react';
-import Header from './Header';
+// import Header from './Header';
 import firebase from "firebase/app";
 import SignIn from './auth/SignIn';
 import { withFirestore, useFirestore } from 'react-redux-firebase';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
+// import { ThemeProvider } from 'styled-components';
 import { UserContext } from '../userContext';
 import { MyContext } from "../context.js"
 import axios from "axios"
 import { message } from "antd";
 import { Jumbotron, Navbar, Nav, Col } from 'react-bootstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
+import '../index.css';
 import 'antd/dist/antd.css';
 
 const theme = {
@@ -221,10 +222,10 @@ const Upload = (props) => {
       {user ? <div>
 
 
-        <form onSubmit={handleFileUpload}>
+        <form onSubmit={handleFileUpload} className='form-structure'>
           <div>
             <label>Select you primary image:</label>
-            <input type="file" name="main-pic" ref={primaryFile} text="Upload file" />
+            <input type="file" name="main-pic" className='form-input' ref={primaryFile} text="Upload file" />
             <br></br>
             <label>Select the rest of your images:</label>
             <input type="file" multiple name="profile_pic" ref={fileInput} />
