@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react'
 import firebase from "firebase/app";
-import { withFirestore, isLoaded } from 'react-redux-firebase';
+// import { withFirestore, isLoaded } from 'react-redux-firebase';
 export const MyContext = createContext()
 
 function MyProvider(props) {

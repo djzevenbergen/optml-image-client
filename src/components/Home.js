@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useContext } from 'react';
 import Header from './Header';
-
+import './Styles.css';
 import firebase from "firebase/app";
 import SignIn from './auth/SignIn';
 import { withFirestore, useFirestore } from 'react-redux-firebase';
@@ -53,10 +53,11 @@ const Profile = (props) => {
 
 
       {/* {user ? "" : */}
-      <div>
+      <div className='container'>
         <h1>Welcome!</h1>
         <p>This is a work in progress.</p>
-        <p>Make an account and start uploading tracks (one at a time for now)</p>
+        <hr/>
+        <h2>Make an account and start uploading tracks (one at a time for now)</h2>
         <p>You can then create a song with any tracks that you have</p>
         <p>You can then go to the home page and look at other people's songs and listen to them</p>
         <p>Right now the stop function doesn't work for songs, so you need to refresh to stop the song</p>

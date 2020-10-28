@@ -1,15 +1,16 @@
 import React, { useRef, useState, useEffect, useContext } from 'react';
-import Header from './Header';
+import './Styles.css';
+// import Header from './Header';
 import firebase from "firebase/app";
-import SignIn from './auth/SignIn';
+// import SignIn from './auth/SignIn';
 import { withFirestore, useFirestore } from 'react-redux-firebase';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+// import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { UserContext } from '../userContext';
 import { MyContext } from "../context.js"
 import axios from "axios"
 import { message } from "antd";
-import { Jumbotron, Navbar, Nav, Col } from 'react-bootstrap';
+// import { Jumbotron, Navbar, Nav, Col } from 'react-bootstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'antd/dist/antd.css';
 
@@ -91,6 +92,8 @@ const Upload = (props) => {
   const [user, setUser] = useState(null);
   const auth = firebase.auth();
   const [deleteBool, setDeleteBool] = useState(false);
+  const database = firebase.database();
+  const [successBool, checkSuccess] = useState(false);
 
   let mainList = {};
   let timeStamp = "";
@@ -118,6 +121,9 @@ const Upload = (props) => {
   const handleEmail = (e) => {
     checkEmail(e);
     console.log(email)
+  }
+  const handleSuccess = (e) => {
+    checkSuccess(e)
   }
 
   // const changeTimeStamp = (t) => {
@@ -147,7 +153,7 @@ const Upload = (props) => {
         'timeStamp': Date.now()
       }
     })
-      .then(response => { addInfoToDb(response); console.log(response) })
+      .then(response => { addInfoToDb(response); handleSuccess(true); console.log(response) })
       .catch(error => console.log(error))
   }
 
@@ -162,6 +168,7 @@ const Upload = (props) => {
 
     resp["data"]['Data'].forEach((d) => {
       let temp = d['Key'].split('/')
+      console.log(d)
       console.log(temp[temp.length - 3])
       timeStamp = temp[temp.length - 3]
       if (temp[temp.length - 1] == mainList['main']) {
@@ -175,6 +182,19 @@ const Upload = (props) => {
     })
 
     try {
+
+      firebase.database().ref('transactions/' + user.displayName + "_" + timeStamp).set({
+        timeStamp: timeStamp,
+        mainPic: mainUrl,
+        otherPics: otherUrls,
+        category: category,
+        amazon: amazon,
+        shopify: shopify,
+        price: price,
+        email: email
+      });
+
+
       return firestore.collection("transactions").add({ user: user.displayName, timeStamp: timeStamp, mainPic: mainUrl, otherPics: otherUrls, category: category, amazon: amazon, shopify: shopify, price: price, email: email });
     } catch (error) {
       message.error(error.message)
@@ -259,6 +279,8 @@ const Upload = (props) => {
         ""
       }
       { console.log("screech")}
+
+      {successBool ? message.success("upload complete") : ""}
     </React.Fragment >
   );
 }

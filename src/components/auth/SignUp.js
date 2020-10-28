@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import firebase from 'firebase/app';
 import { useFirestore } from 'react-redux-firebase';
-import { withFirebase } from 'react-redux-firebase'
+// import { withFirebase } from 'react-redux-firebase'
 import { Redirect } from 'react-router-dom';
 import { message } from 'antd'
 import { UserContext } from '../../userContext';
@@ -38,7 +38,7 @@ function SignUp() {
       })
 
     console.log(userNameList[0])
-    if (userNameList[0] != (userName)) {
+    if (userNameList[0] !== (userName)) {
 
 
       firebase.auth().createUserWithEmailAndPassword(email, password).then(function (data) {

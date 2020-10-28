@@ -38,7 +38,7 @@ function App() {
   const [theme, changeTheme] = useState(darkTheme)
 
   const toggleTheme = () => {
-    if (theme == lightTheme) {
+    if (theme === lightTheme) {
       changeTheme(darkTheme)
     } else {
       changeTheme(lightTheme)

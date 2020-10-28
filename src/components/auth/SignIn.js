@@ -5,7 +5,7 @@ import { message } from 'antd'
 import SignUp from "./SignUp";
 import { UserContext } from '../../userContext'
 import { MyContext } from "../../context.js"
-import { withFirebase } from 'react-redux-firebase'
+// import { withFirebase } from 'react-redux-firebase'
 
 
 function SignIn() {
