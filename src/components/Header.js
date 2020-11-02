@@ -64,6 +64,7 @@ const Header = (props) => {
             <Nav.Link> <Link className='navLink1' style={navColor} to="/signin">{user ? "Sign Out" : "Sign in"}</Link></Nav.Link>
             <Nav.Link> <Link className='navLink1' style={navColor} to="/home">Home</Link></Nav.Link>
             <Nav.Link> <Link className='navLink1' style={navColor} to="/upload">{user ? "Optimize Photos" : ""}</Link></Nav.Link>
+            <Nav.Link> <Link className='navLink1' style={navColor} to="/profile">{user ? "User Profile" : ""}</Link></Nav.Link>
 
             <Nav.Link> <Link id="home" className='navLink1' style={navColor} onClick={toggleTheme}>Toggle Visibility</Link></Nav.Link>
           </Nav>
