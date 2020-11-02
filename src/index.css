@@ -8,18 +8,21 @@ body {
 }
 
 .container {
+  margin: 60px auto;
+  padding: 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: left;
-  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 1, 0.3), 0 7px 20px 0 rgba(0, 0, 1, 0.3);
   object-fit: contain;
+  border-radius: 8px;
 }
 
 .form-container {
   margin: 65px auto;
   width: 900px;
-  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 1, 0.3), 0 7px 20px 0 rgba(0, 0, 1, 0.3);
   position: relative;
   border-radius: 10px;
   height: 450px;
