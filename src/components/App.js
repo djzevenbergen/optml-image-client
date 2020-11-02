@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Header from './Header';
 
@@ -9,6 +8,7 @@ import { UserContext } from '../userContext';
 
 import Home from "./Home";
 import Upload from "./Upload";
+import Profile from "./UserProfile";
 
 
 import 'antd/dist/antd.css';
@@ -61,6 +61,9 @@ function App() {
             </Route>
             <Route path='/upload'>
               <Upload />
+            </Route>
+            <Route path='/profile'>
+              <Profile />
             </Route>
           </Switch>
         </ThemeProvider>
