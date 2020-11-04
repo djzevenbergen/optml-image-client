@@ -47,14 +47,72 @@ const UserProfile = (props) => {
   return (
     <React.Fragment>
 
-
       {/* {user ? "" : */}
       <div className='container'>
-        <h1>This is the User Profile Page</h1>
-        <h2>Ideally this is where you would see a user's upload history</h2>
-        <p>Or Maybe a user would be able to see their own upload history?</p>
-        <p>What about having access to the library of things that they've uploaded.</p>
-        <p>And to the larger libary of other things that people have uploaded??  or maybe that's for another page.</p>
+        <h1>Become a Subscriber</h1>
+        <form action="#">
+
+          <div class="container-fluid grid">
+
+            <div class="row pull-center">
+              <div class="col-md-4">
+
+                <div class="well">
+
+                  <div class="row card">
+                  </div>
+
+                  <br />
+
+                  <div class="row-fluid">
+                    <div class="col-md-8">
+                      <div class="form-group">
+                        <label>Credit Card Number </label>
+                        <input type="text" name="number" class="form-control" />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Expiration</label>
+
+                        <input type="text" placeholder="MM/YY" name="expiry" class="form-control" />
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row-fluid">
+                    <div class="col-md-8">
+                      <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" class="form-control" />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+
+                        <label>CVV </label>
+
+                        <input type="text" name="cvv" class="form-control" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row ">
+
+                    <div class="col-md-12 text-right">
+                      <button type="button" class="btn btn-success">Submit</button>
+                      <button type="button" class="btn btn-info">Clear</button>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
 
       {console.log("screech")}
