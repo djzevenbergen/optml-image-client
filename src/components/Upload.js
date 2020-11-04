@@ -257,7 +257,7 @@ const Upload = (props) => {
             <input type="checkbox" value="shopify" onChange={handleShopifyCheck} />
             <br></br>
             <label>Amazon ASIN, JAN, EAN, 13-digit ISBN or UPC:</label>
-            <input type="submit" name="asin" />
+            <input type="html/text" name="asin" />
             <br></br>
             <label>Category</label>
             <select value={category} onChange={e => handleCategory(e.currentTarget.value)}>
