@@ -5,9 +5,9 @@ import { withFirestore, useFirestore } from 'react-redux-firebase';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { UserContext } from '../userContext';
-import { MyContext } from "../context.js"
-
-import { Jumbotron, Navbar, Nav, Col } from 'react-bootstrap';
+import { MyContext } from "../context.js";
+import Button from 'react-bootstrap/Button';
+import { Jumbotron, Navbar, Nav, Col, } from 'react-bootstrap';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'antd/dist/antd.css';
@@ -21,6 +21,27 @@ const theme = {
   white: '#e6f1ff',
 
 };
+
+// new Card({
+//   form: 'form',
+//   container: '.card',
+//   formSelectors: {
+//     numberInput: 'input[name=number]',
+//     expiryInput: 'input[name=expiry]',
+//     cvcInput: 'input[name=cvv]',
+//     nameInput: 'input[name=name]'
+//   },
+
+//   width: 390, // optional — default 350px
+//   formatting: true,
+
+//   placeholders: {
+//     number: '•••• •••• •••• ••••',
+//     name: 'Full Name',
+//     expiry: '••/••',
+//     cvc: '•••'
+//   }
+// })
 
 const UserProfile = (props) => {
   const firestore = useFirestore();
@@ -49,6 +70,7 @@ const UserProfile = (props) => {
 
       {/* {user ? "" : */}
       <div className='container'>
+
         <h1>Become a Subscriber</h1>
         <form action="#">
 
@@ -56,7 +78,6 @@ const UserProfile = (props) => {
 
             <div class="row pull-center">
               <div class="col-md-4">
-
                 <div class="well">
 
                   <div class="row card">
@@ -71,12 +92,11 @@ const UserProfile = (props) => {
                         <input type="text" name="number" class="form-control" />
                       </div>
                     </div>
+
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Expiration</label>
-
                         <input type="text" placeholder="MM/YY" name="expiry" class="form-control" />
-
                       </div>
                     </div>
                   </div>
@@ -91,21 +111,17 @@ const UserProfile = (props) => {
 
                     <div class="col-md-4">
                       <div class="form-group">
-
                         <label>CVV </label>
-
                         <input type="text" name="cvv" class="form-control" />
                       </div>
                     </div>
                   </div>
 
                   <div class="row ">
-
                     <div class="col-md-12 text-right">
                       <button type="button" class="btn btn-success">Submit</button>
                       <button type="button" class="btn btn-info">Clear</button>
                     </div>
-
                   </div>
 
                 </div>
