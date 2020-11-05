@@ -24,6 +24,10 @@ code {
   border-radius: 8px;
 }
 
+.container-fluid {
+    margin-top: 15px;
+}
+
 .form-container {
   margin: 65px auto;
   width: 900px;
