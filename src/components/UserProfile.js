@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { CardElement, injectStripe, ReactStripeElements } from 'react-stripe-elements';
+import { CardElement, useStripe, useElements } from 'react-stripe-elements';
 import '../index.css';
 import firebase from "firebase/app";
 import { withFirestore, useFirestore } from 'react-redux-firebase';
@@ -9,6 +9,7 @@ import { UserContext } from '../userContext';
 import { MyContext } from "../context.js";
 import Button from 'react-bootstrap/Button';
 import { Jumbotron, Navbar, Nav, Col, } from 'react-bootstrap';
+import axios from "axios";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'antd/dist/antd.css';
@@ -32,6 +33,31 @@ const UserProfile = (props) => {
   const [user, setUser] = useState(null);
   const auth = firebase.auth();
   const [deleteBool, setDeleteBool] = useState(false);
+
+  // const stripe = useStripe();
+  // const elements = useElements();
+
+  // const handleSubmit = async event => {
+  //   event.preventDefault();
+
+    // const { error, paymentMethod } = await stripe.createPaymentMethod({
+    //   type: "card",
+    //   card: elements.getElement(CardElement)
+    // });
+
+    // if (!error) {
+    //   const { id } = paymentMethod;
+
+    //   try {
+    //     const { data } = await axios.post("/api/charge", {id, amount: 999});  // represents $9.99
+    //     console.log(data);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
+  // };
+
+
 
 //   new Card({
 //     form: 'form',
@@ -64,6 +90,7 @@ const UserProfile = (props) => {
 
   }, [context.state.user])
 
+
   return (
     <React.Fragment>
 
@@ -71,7 +98,7 @@ const UserProfile = (props) => {
       <div className='container'>
 
         <h1>Become a Subscriber</h1>
-        <form action="#">
+        <form  action="#">  {/* may need to add an onSubmit */}
 
           <div class="container-fluid grid">
 
