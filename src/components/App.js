@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { StripeProvider, Elements } from 'react-stripe-elements';
 import Header from './Header';
 
 import SignIn from './auth/SignIn';
@@ -63,7 +64,11 @@ function App() {
               <Upload />
             </Route>
             <Route path='/profile'>
-              <Profile />
+              <StripeProvider apiKey="pk_test_51HjvNPIlDhRSkzlbqOR5DXCGwoMqc9Ffw12Nicpfp66F8hfsKy88eXGRkGx9tVk1PzImunYN7DRJeQUN2Wa3efan00JZNot4Eh" >
+                <Elements>
+                  <Profile />
+                </Elements>
+              </StripeProvider>
             </Route>
           </Switch>
         </ThemeProvider>

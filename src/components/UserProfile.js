@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { CardElement, injectStripe, ReactStripeElements } from 'react-stripe-elements';
 import '../index.css';
 import firebase from "firebase/app";
 import { withFirestore, useFirestore } from 'react-redux-firebase';
@@ -22,27 +23,6 @@ const theme = {
 
 };
 
-// new Card({
-//   form: 'form',
-//   container: '.card',
-//   formSelectors: {
-//     numberInput: 'input[name=number]',
-//     expiryInput: 'input[name=expiry]',
-//     cvcInput: 'input[name=cvv]',
-//     nameInput: 'input[name=name]'
-//   },
-
-//   width: 390, // optional — default 350px
-//   formatting: true,
-
-//   placeholders: {
-//     number: '•••• •••• •••• ••••',
-//     name: 'Full Name',
-//     expiry: '••/••',
-//     cvc: '•••'
-//   }
-// })
-
 const UserProfile = (props) => {
   const firestore = useFirestore();
   const [value, setValue] = useState(UserContext);
@@ -53,7 +33,26 @@ const UserProfile = (props) => {
   const auth = firebase.auth();
   const [deleteBool, setDeleteBool] = useState(false);
 
+//   new Card({
+//     form: 'form',
+//     container: '.card',
+//     formSelectors: {
+//       numberInput: 'input[name=number]',
+//       expiryInput: 'input[name=expiry]',
+//       cvcInput: 'input[name=cvv]',
+//       nameInput: 'input[name=name]'
+//     },
 
+//     width: 390, // optional — default 350px
+//     formatting: true,
+
+//     placeholders: {
+//       number: '•••• •••• •••• ••••',
+//       name: 'Full Name',
+//       expiry: '••/••',
+//       cvc: '•••'
+//     }
+// })
 
 
   useEffect(() => {
