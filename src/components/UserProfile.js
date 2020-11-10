@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import { ThemeProvider } from 'styled-components';
 import { UserContext } from '../userContext';
 import { MyContext } from "../context.js";
-import Button from 'react-bootstrap/Button';
 import { Jumbotron, Navbar, Nav, Col, } from 'react-bootstrap';
 import axios from "axios";
 
