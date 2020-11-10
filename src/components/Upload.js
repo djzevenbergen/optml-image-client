@@ -83,6 +83,7 @@ const Upload = (props) => {
   const [shopify, checkShopify] = useState(false);
   const [category, checkCategory] = useState('Appliances');
   const [price, checkPrice] = useState('$0-1.99')
+  const [asin, checkAsin] = useState("");
   const [mainPicName, checkName] = useState("")
   const [email, checkEmail] = useState(null)
   // const [timeStamp, changeTime] = useState(0)
@@ -106,6 +107,11 @@ const Upload = (props) => {
 
   const handleAmazonCheck = () => {
     checkAmazon(!amazon)
+  }
+  const handleAsinCheck = (e) => {
+    console.log(e)
+    checkAsin(e)
+    console.log(asin)
   }
   const handleShopifyCheck = () => {
     checkShopify(!shopify)
@@ -185,6 +191,7 @@ const Upload = (props) => {
 
       firebase.database().ref('transactions/' + user.displayName + "_" + timeStamp).set({
         timeStamp: timeStamp,
+        asin: asin,
         mainPic: mainUrl,
         otherPics: otherUrls,
         category: category,
@@ -195,7 +202,7 @@ const Upload = (props) => {
       });
 
 
-      return firestore.collection("transactions").add({ user: user.displayName, timeStamp: timeStamp, mainPic: mainUrl, otherPics: otherUrls, category: category, amazon: amazon, shopify: shopify, price: price, email: email });
+      return firestore.collection("transactions").add({ user: user.displayName, timeStamp: timeStamp, asin: asin, mainPic: mainUrl, otherPics: otherUrls, category: category, amazon: amazon, shopify: shopify, price: price, email: email });
     } catch (error) {
       message.error(error.message)
     }
@@ -257,7 +264,7 @@ const Upload = (props) => {
             <input type="checkbox" value="shopify" onChange={handleShopifyCheck} />
             <br></br>
             <label>Amazon ASIN, JAN, EAN, 13-digit ISBN or UPC:</label>
-            <input type="html/text" name="asin" />
+            <input type="html/text" name="asin" onChange={e => handleAsinCheck(e.currentTarget.value)} />
             <br></br>
             <label>Category</label>
             <select value={category} onChange={e => handleCategory(e.currentTarget.value)}>
@@ -270,7 +277,7 @@ const Upload = (props) => {
               {Object.keys(prices).map((c) => (
                 <option value={c}>{c}</option>
               ))}
-            </select><br/>
+            </select><br />
             <label>Email to:</label>
             <input type="email" defaultValue={user.email} onChange={e => handleEmail(e.currentTarget.value)} />
           </div>
