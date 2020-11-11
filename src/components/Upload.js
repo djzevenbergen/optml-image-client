@@ -201,7 +201,6 @@ const Upload = (props) => {
         email: email
       });
 
-
       return firestore.collection("transactions").add({ user: user.displayName, timeStamp: timeStamp, asin: asin, mainPic: mainUrl, otherPics: otherUrls, category: category, amazon: amazon, shopify: shopify, price: price, email: email });
     } catch (error) {
       message.error(error.message)
