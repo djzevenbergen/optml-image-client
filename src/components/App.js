@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Header from './Header';
-
+import { loadStripe } from '@stripe/stripe-js';
 import SignIn from './auth/SignIn';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { UserContext } from '../userContext';
-
+import { Elements } from '@stripe/react-stripe-js';
 import Home from "./Home";
 import Upload from "./Upload";
 import Profile from "./UserProfile";
@@ -36,7 +36,7 @@ const darkTheme = {
 function App() {
   const [value, setValue] = useState(null)
   const [theme, changeTheme] = useState(darkTheme)
-
+  const stripePromise = loadStripe('pk_test_51HkDM6Hnepz07q3sOlwTDA5r0ConQc1yFJ3XemTKKFKdzILL2Dl2JR5Bm6vmn6YPLlg4n4vCkjeqQdIflhp06uJt00Y9dSLj25');
   const toggleTheme = () => {
     if (theme === lightTheme) {
       changeTheme(darkTheme)
@@ -63,7 +63,9 @@ function App() {
               <Upload />
             </Route>
             <Route path='/profile'>
-              <Profile />
+              <Elements stripe={stripePromise}>
+                <Profile />
+              </Elements>
             </Route>
           </Switch>
         </ThemeProvider>

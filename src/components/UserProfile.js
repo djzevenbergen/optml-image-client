@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import '../index.css';
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import axios from 'axios';
 import firebase from "firebase/app";
 import { withFirestore, useFirestore } from 'react-redux-firebase';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
@@ -26,6 +28,8 @@ const UserProfile = (props) => {
   const firestore = useFirestore();
   const [value, setValue] = useState(UserContext);
 
+  const stripe = useStripe();
+  const elements = useElements();
 
   const context = useContext(MyContext);
   const [user, setUser] = useState(null);
@@ -33,6 +37,25 @@ const UserProfile = (props) => {
   const [deleteBool, setDeleteBool] = useState(false);
 
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: 'card',
+      card: elements.getElement(CardElement)
+    });
+
+    if (!error) {
+      const { id } = paymentMethod;
+
+      try {
+        const { data } = await axios.post("/api/charge", { id, amount: 999 });
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
 
   useEffect(() => {
@@ -41,25 +64,17 @@ const UserProfile = (props) => {
     if (auth.currentUser) {
       setValue(auth.currentUser);
     }
-
   }, [context.state.user])
 
-  return (
-    <React.Fragment>
-
-
-      {/* {user ? "" : */}
-      <div className='container'>
-        <h1>This is the User Profile Page</h1>
-        <h2>Ideally this is where you would see a user's upload history</h2>
-        <p>Or Maybe a user would be able to see their own upload history?</p>
-        <p>What about having access to the library of things that they've uploaded.</p>
-        <p>And to the larger libary of other things that people have uploaded??  or maybe that's for another page.</p>
-      </div>
-
-      {console.log("screech")}
-    </React.Fragment>
-  );
-}
+    return (
+      <form onSubmit={handleSubmit} style={{ maxWidth: "400px", margin: "0 auto" }}>
+        <h2>Become a subscriber for $9.99/month</h2>
+        <CardElement />
+        <button type="submit" disable={!stripe}>
+          Pay
+      </button>
+      </form>
+    );
+  };
 
 export default withFirestore(UserProfile);
