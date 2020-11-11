@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { StripeProvider, Elements } from 'react-stripe-elements';
+import {loadStripe} from '@stripe/stripe-js';
 import Header from './Header';
-
+import axios from 'axios';
 import SignIn from './auth/SignIn';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { UserContext } from '../userContext';
-
+import { Elements } from '@stripe/react-stripe-js';
 import Home from "./Home";
 import Upload from "./Upload";
 import Profile from "./UserProfile";
@@ -46,9 +46,9 @@ function App() {
     }
 
   }
+  const stripePromise = loadStripe('pk_test_51HkDM6Hnepz07q3sOlwTDA5r0ConQc1yFJ3XemTKKFKdzILL2Dl2JR5Bm6vmn6YPLlg4n4vCkjeqQdIflhp06uJt00Y9dSLj25');
 
   return (
-
     <Router>
       <UserContext.Provider value={{ value, setValue }} theme={{ theme, toggleTheme }}>
         <ThemeProvider theme={theme}>
@@ -64,11 +64,9 @@ function App() {
               <Upload />
             </Route>
             <Route path='/profile'>
-              <StripeProvider apiKey="pk_test_51HjvNPIlDhRSkzlbqOR5DXCGwoMqc9Ffw12Nicpfp66F8hfsKy88eXGRkGx9tVk1PzImunYN7DRJeQUN2Wa3efan00JZNot4Eh" >
-                <Elements>
-                  <Profile />
-                </Elements>
-              </StripeProvider>
+              <Elements stripe={stripePromise}>
+                <Profile />
+              </Elements>
             </Route>
           </Switch>
         </ThemeProvider>
