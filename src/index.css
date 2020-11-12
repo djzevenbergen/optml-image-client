@@ -34,7 +34,7 @@ code {
   box-shadow: 0 5px 8px 0 rgba(0, 0, 1, 0.3), 0 7px 20px 0 rgba(0, 0, 1, 0.3);
   position: relative;
   border-radius: 10px;
-  height: 450px;
+  height: 550px;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -52,3 +52,6 @@ code {
   align-items: center;
 }
 
+.email-input {
+  display: flex;
+}
