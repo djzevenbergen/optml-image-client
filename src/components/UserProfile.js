@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { CardElement, injectStripe, ReactStripeElements } from 'react-stripe-elements';
+import {useStripe, useElements, CardElement } from '@stripe/react-stripe-js'
 import '../index.css';
 import firebase from "firebase/app";
 import { withFirestore, useFirestore } from 'react-redux-firebase';
@@ -9,7 +9,7 @@ import { UserContext } from '../userContext';
 import { MyContext } from "../context.js";
 import Button from 'react-bootstrap/Button';
 import { Jumbotron, Navbar, Nav, Col, } from 'react-bootstrap';
-
+import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'antd/dist/antd.css';
 
@@ -54,7 +54,6 @@ const UserProfile = (props) => {
 //     }
 // })
 
-
   useEffect(() => {
     console.log(context.state.user)
     setUser(auth.currentUser)
@@ -64,75 +63,44 @@ const UserProfile = (props) => {
 
   }, [context.state.user])
 
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card: elements.getElement(CardElement),
+    });
+
+    if (!error) {
+      const { id } = paymentMethod;
+
+      try {
+        const { data } = await axios.post("https://sheltered-cove-51906.herokuapp.com/api/charge", {
+          id,
+          amount: 999,
+        });
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   return (
-    <React.Fragment>
-
-      {/* {user ? "" : */}
-      <div className='container'>
-
-        <h1>Become a Subscriber</h1>
-        <form action="#">
-
-          <div class="container-fluid grid">
-
-            <div class="row pull-center">
-              <div class="col-md-4">
-                <div class="well">
-
-                  <div class="row card">
-                  </div>
-
-                  <br />
-
-                  <div class="row-fluid">
-                    <div class="col-md-8">
-                      <div class="form-group">
-                        <label>Credit Card Number </label>
-                        <input type="text" name="number" class="form-control" />
-                      </div>
-                    </div>
-
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label>Expiration</label>
-                        <input type="text" placeholder="MM/YY" name="expiry" class="form-control" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row-fluid">
-                    <div class="col-md-8">
-                      <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" name="name" class="form-control" />
-                      </div>
-                    </div>
-
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label>CVV </label>
-                        <input type="text" name="cvv" class="form-control" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row ">
-                    <div class="col-md-12 text-right">
-                      <button type="button" class="btn btn-success">Submit</button>
-                      <button type="button" class="btn btn-info">Clear</button>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-
-      {console.log("screech")}
-    </React.Fragment>
+    <form
+      onSubmit={handleSubmit}
+      style={{ maxWidth: "400px", margin: "0 auto" }}
+    >
+      <h2>Become a subscriber for $9.99/month</h2>
+      <CardElement />
+      <button type="submit" disable={!stripe}>
+        Pay
+      </button>
+    </form>
   );
-}
+};
 
 export default withFirestore(UserProfile);
