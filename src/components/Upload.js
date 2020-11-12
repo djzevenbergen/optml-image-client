@@ -170,11 +170,15 @@ const Upload = (props) => {
   const addInfoToDb = (resp) => {
     let mainUrl = "";
     let otherUrls = "";
+    let emails = "";
     console.log(amazon, shopify);
     console.log(category);
     console.log(mainList["main"]);
     console.log(email);
-    Object.values();
+    inputList.forEach((email) => {
+      emails += email["email"] + "|";
+    });
+    console.log(emails);
     resp["data"]["Data"].forEach((d) => {
       let temp = d["Key"].split("/");
       console.log(d);
@@ -202,7 +206,7 @@ const Upload = (props) => {
           amazon: amazon,
           shopify: shopify,
           price: price,
-          email: email,
+          email: emails,
         });
 
       return firestore.collection("transactions").add({
@@ -215,7 +219,7 @@ const Upload = (props) => {
         amazon: amazon,
         shopify: shopify,
         price: price,
-        email: email,
+        email: emails,
       });
     } catch (error) {
       message.error(error.message);
