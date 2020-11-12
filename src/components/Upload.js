@@ -277,8 +277,11 @@ const Upload = (props) => {
                 <option value={c}>{c}</option>
               ))}
             </select><br />
-            <label>Email to:</label>
-            <input type="email" defaultValue={user.email} onChange={e => handleEmail(e.currentTarget.value)} />
+            <label>Email to:</label><br/>
+            <input className='email-input' type="email" defaultValue={user.email} onChange={e => handleEmail(e.currentTarget.value)} /><br/>
+            <input className='email-input' type="email" defaultValue={user.email2} onChange={e => handleEmail(e.currentTarget.value)} /><br/>
+            <input className='email-input' type="email" defaultValue={user.email3} onChange={e => handleEmail(e.currentTarget.value)} /><br/>
+            <input className='email-input' type="email" defaultValue={user.email4} onChange={e => handleEmail(e.currentTarget.value)} />
           </div>
           <div>
             <input type="submit" name="btn_upload_profile_pic" value="Upload" />
