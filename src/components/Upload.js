@@ -174,7 +174,7 @@ const Upload = (props) => {
     console.log(category);
     console.log(mainList["main"]);
     console.log(email);
-
+    Object.values();
     resp["data"]["Data"].forEach((d) => {
       let temp = d["Key"].split("/");
       console.log(d);
@@ -243,6 +243,7 @@ const Upload = (props) => {
     const list = [...inputList];
     list[index][name] = value;
     setInputList(list);
+    console.log(list);
   };
 
   // handle click event of the Remove button
@@ -250,6 +251,7 @@ const Upload = (props) => {
     const list = [...inputList];
     list.splice(index, 1);
     setInputList(list);
+    console.log(list);
   };
 
   // handle click event of the Add button
