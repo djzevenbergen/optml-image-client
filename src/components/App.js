@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StripeProvider, Elements } from 'react-stripe-elements';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import Header from './Header';
 
 import SignIn from './auth/SignIn';
@@ -9,7 +10,7 @@ import { UserContext } from '../userContext';
 
 import Home from "./Home";
 import Upload from "./Upload";
-import Profile from "./UserProfile";
+import UserProfile from "./UserProfile";
 
 
 import 'antd/dist/antd.css';
@@ -34,6 +35,10 @@ const darkTheme = {
   url: "././logo.png",
 }
 
+const stripePromise = loadStripe(
+  "pk_test_51HkDM6Hnepz07q3sOlwTDA5r0ConQc1yFJ3XemTKKFKdzILL2Dl2JR5Bm6vmn6YPLlg4n4vCkjeqQdIflhp06uJt00Y9dSLj25"
+);
+
 function App() {
   const [value, setValue] = useState(null)
   const [theme, changeTheme] = useState(darkTheme)
@@ -46,6 +51,7 @@ function App() {
     }
 
   }
+
 
   return (
 
@@ -64,11 +70,9 @@ function App() {
               <Upload />
             </Route>
             <Route path='/profile'>
-              <StripeProvider apiKey="pk_test_51HjvNPIlDhRSkzlbqOR5DXCGwoMqc9Ffw12Nicpfp66F8hfsKy88eXGRkGx9tVk1PzImunYN7DRJeQUN2Wa3efan00JZNot4Eh" >
-                <Elements>
-                  <Profile />
-                </Elements>
-              </StripeProvider>
+              <Elements stripe={stripePromise}>
+                <UserProfile />
+              </Elements>
             </Route>
           </Switch>
         </ThemeProvider>
