@@ -110,26 +110,32 @@ const Upload = (props) => {
   const handleAmazonCheck = () => {
     checkAmazon(!amazon);
   };
+
   const handleAsinCheck = (e) => {
     console.log(e);
     checkAsin(e);
     console.log(asin);
   };
+
   const handleShopifyCheck = () => {
     checkShopify(!shopify);
   };
+
   const handleCategory = (e) => {
     checkCategory(e);
     console.log(category);
   };
+
   const handlePrice = (e) => {
     checkPrice(e);
     console.log(price);
   };
+
   const handleEmail = (e) => {
     checkEmail(e);
     console.log(email);
   };
+
   const handleSuccess = (e) => {
     checkSuccess(e);
   };
