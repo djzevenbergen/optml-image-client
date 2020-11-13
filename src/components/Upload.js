@@ -11,7 +11,7 @@ import { UserContext } from "../userContext";
 import { MyContext } from "../context.js";
 import axios from "axios";
 import { message } from "antd";
-// import { Jumbotron, Navbar, Nav, Col } from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "antd/dist/antd.css";
 
@@ -96,6 +96,7 @@ const Upload = (props) => {
   const database = firebase.database();
   const [successBool, checkSuccess] = useState(false);
   const [inputList, setInputList] = useState([{ email: "" }]);
+  const [uploading, setUploading] = useState(false);
 
   let mainList = {};
   let timeStamp = "";
@@ -231,6 +232,7 @@ const Upload = (props) => {
 
   const handleFileUpload = (e) => {
     e.preventDefault();
+    setUploading(true);
     let mainPic = primaryFile.current.files;
     mainPic[0]["primary"] = true;
     mainList["main"] = mainPic[0]["name"];
@@ -263,6 +265,7 @@ const Upload = (props) => {
   const handleAddClick = () => {
     setInputList([...inputList, { email: "" }]);
   };
+
   useEffect(() => {
     // callApi();
     setUser(auth.currentUser);
@@ -373,11 +376,13 @@ const Upload = (props) => {
               })}
             </div>
             <div>
-              <input
-                type="submit"
-                name="btn_upload_profile_pic"
-                value="Upload"
-              />
+              {uploading ? <Spinner animation="border" /> :
+                <input
+                  type="submit"
+                  name="btn_upload_profile_pic"
+                  value="Upload"
+                />
+              }
             </div>
           </form>
         </div>
