@@ -4,6 +4,7 @@ import "../index.css";
 import firebase from "firebase/app";
 // import SignIn from './auth/SignIn';
 import { withFirestore, useFirestore } from "react-redux-firebase";
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 // import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { ThemeProvider } from "styled-components";
 import { UserContext } from "../userContext";
@@ -381,11 +382,12 @@ const Upload = (props) => {
           </form>
         </div>
       ) : (
-        ""
-      )}
+          ""
+        )}
       {console.log("screech")}
 
       {successBool ? message.success("upload complete") : ""}
+      {successBool ? <Redirect to="/profile" /> : ""}
     </React.Fragment>
   );
 };
