@@ -194,9 +194,11 @@ const Upload = (props) => {
       timeStamp = temp[temp.length - 3];
       if (temp[temp.length - 1] == mainList["main"]) {
         console.log("this is the main", d["Bucket"], d["Key"]);
+        console.log(d["Location"])
         mainUrl = d["Location"];
       } else {
         console.log(d["Bucket"], d);
+        console.log(d["Location"])
         otherUrls += d["Location"] + "|";
       }
     });
@@ -237,15 +239,35 @@ const Upload = (props) => {
   };
 
   const handleFileUpload = (e) => {
+
     e.preventDefault();
+
     setUploading(true);
     let mainPic = primaryFile.current.files;
     mainPic[0]["primary"] = true;
-    mainList["main"] = mainPic[0]["name"];
+
+
+    const notAllowed = ["#", "%", "&", "{", "}", "\\", ">", "<", "*", "?", "/", " ", "$", "!", "'", '"', ":", "@", "+", "`", "|", "="]
+
+
+    let tempName = ""
+    console.log(mainPic[0]["name"])
+    for (let i = 0; i < mainPic[0]["name"].length; i++) {
+      if (notAllowed.includes(mainPic[0]["name"].charAt(i))) {
+        tempName += "_"
+      } else {
+        tempName += mainPic[0]["name"].charAt(i)
+      }
+    }
+
+
+
+    mainList["main"] = tempName;
 
     console.log(mainPic[0]["name"]);
     let file = fileInput.current.files;
     file = [...file, mainPic[0]];
+
     console.log(mainPic);
     console.log(file);
     uploadRequest(file);
